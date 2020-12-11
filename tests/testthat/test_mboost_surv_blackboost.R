@@ -17,5 +17,5 @@ test_that("ctrlpars", {
   learner = lrn("surv.blackboost", mstop = 99, maxpts = 24000, abseps = 0.1)
   expect_silent(
     expect_prediction_surv(learner$train(task, row_ids = 1:50)$predict(task, row_ids = 51:100))
-    )
+  )
 })

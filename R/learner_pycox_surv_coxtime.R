@@ -79,8 +79,9 @@ LearnerSurvCoxtime = R6::R6Class("LearnerSurvCoxtime",
       ps$add_dep("with_std", "standardize_time", CondEqual$new(TRUE))
 
       ps$add_dep("rho", "optimizer", CondEqual$new("adadelta"))
-      ps$add_dep("eps", "optimizer", CondAnyOf$new(setdiff(pycox_optimizers,
-                                                           c("asgd", "rprop", "sgd"))))
+      ps$add_dep("eps", "optimizer", CondAnyOf$new(setdiff(
+        pycox_optimizers,
+        c("asgd", "rprop", "sgd"))))
       ps$add_dep("lr", "optimizer", CondEqual$new("adadelta"))
       ps$add_dep(
         "weight_decay", "optimizer",

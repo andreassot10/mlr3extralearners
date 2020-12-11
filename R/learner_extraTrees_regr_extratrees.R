@@ -62,6 +62,7 @@ LearnerRegrExtraTrees = R6Class("LearnerRegrExtraTrees",
 
   private = list(
     .train = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       self$state$feature_names = task$feature_names
 

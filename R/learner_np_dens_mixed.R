@@ -80,7 +80,8 @@ LearnerDensMixed = R6Class("LearnerDensMixed",
       pars = self$param_set$get_values(tag = "train")
       data = task$truth()
 
-      pdf <- function(x) {} #nolint
+      pdf <- function(x) {
+      } # nolint
       body(pdf) <- substitute({
         with_package("np", mlr3misc::invoke(np::npudens,
           tdat = data.frame(data),

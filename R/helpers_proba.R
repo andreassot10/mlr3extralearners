@@ -70,9 +70,9 @@ get_keras_optimizer = function(optimizer = "adam", lr = 0.02, beta_1 = 0.9, beta
 #' build_keras_net(n_in = 10, n_out = 1, nodes = c(4, 4, 4), activation = "elu")
 #' @export
 build_keras_net = function(n_in, n_out, nodes = c(32, 32), layer_pars = list(),
-                           activation = "linear", act_pars = list(),
-                           dropout = 0.1, batch_norm = TRUE,
-                           batch_pars = list()) {
+  activation = "linear", act_pars = list(),
+  dropout = 0.1, batch_norm = TRUE,
+  batch_pars = list()) {
 
   add_module = function(net, num_in, num_out) {
     mlr3misc::invoke(
@@ -127,7 +127,7 @@ build_keras_net = function(n_in, n_out, nodes = c(32, 32), layer_pars = list(),
 #' @param install_tensorflow If `TRUE` installs the dependency `tensorflow` package as well.
 #' @export
 install_keras = function(method = "auto", conda = "auto", pip = FALSE,
-                          install_tensorflow = FALSE) {
+  install_tensorflow = FALSE) {
   pkg = "keras"
   if (install_tensorflow) {
     pkg = c("tensorflow", pkg)
@@ -150,10 +150,11 @@ get_pseudo_conditional = function(t, d, qt) {
   Delta = do.call(cbind, lapply(seq_len(ns), function(j) pmin(t, s[j + 1]) - s[j]))
 
   # long format
-  dd_tmp = cbind.data.frame(id = rep(seq_len(n), ns),
-                            s = rep(c(0, qt[-length(qt)]), each = n),
-                            y = c(R * Delta),
-                            d = c(D))
+  dd_tmp = cbind.data.frame(
+    id = rep(seq_len(n), ns),
+    s = rep(c(0, qt[-length(qt)]), each = n),
+    y = c(R * Delta),
+    d = c(D))
 
   dd = dd_tmp[dd_tmp$y > 0, ]
   pseudost = rep(NA, nrow(dd))
@@ -163,8 +164,9 @@ get_pseudo_conditional = function(t, d, qt) {
     if (all(dds$d) || !any(dds$d)) {
       pseudost[index] = sum(index)
     } else {
-      pseudost[index] = pseudo::pseudosurv(time = dds$y, event = dds$d,
-                                           tmax = s[j + 1] - s[j])$pseudo
+      pseudost[index] = pseudo::pseudosurv(
+        time = dds$y, event = dds$d,
+        tmax = s[j + 1] - s[j])$pseudo
     }
   }
   dd$pseudost = pseudost

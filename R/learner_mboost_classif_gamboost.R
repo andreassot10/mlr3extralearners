@@ -71,6 +71,7 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
     .train = function(task) {
 
       # Default family in mboost::gamboost is not useable for twoclass
+
       if (is.null(self$param_set$values$family)) {
         self$param_set$values$family = "Binomial"
       }

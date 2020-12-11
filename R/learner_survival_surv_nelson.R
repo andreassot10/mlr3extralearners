@@ -22,7 +22,8 @@
 #' @template seealso_learner
 #' @template example
 #' @export
-LearnerSurvNelson = R6Class("LearnerSurvNelson", inherit = LearnerSurv,
+LearnerSurvNelson = R6Class("LearnerSurvNelson",
+  inherit = LearnerSurv,
   public = list(
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
@@ -51,9 +52,12 @@ LearnerSurvNelson = R6Class("LearnerSurvNelson", inherit = LearnerSurv,
       # time = c(0, self$model$time)
 
       # Define WeightedDiscrete distr6 distribution from the cumulative hazard
-      x = rep(list(list(x = self$model$time, cdf = 1 - exp(-self$model$cumhaz))),
+
+      x = rep(
+        list(list(x = self$model$time, cdf = 1 - exp(-self$model$cumhaz))),
         task$nrow)
-      distr = distr6::VectorDistribution$new(distribution = "WeightedDiscrete", params = x,
+      distr = distr6::VectorDistribution$new(
+        distribution = "WeightedDiscrete", params = x,
         decorators = c("CoreStatistics", "ExoticStatistics"))
 
       # Define crank as the mean of the survival distribution

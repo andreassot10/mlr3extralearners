@@ -34,24 +34,28 @@ test_that("manualtest - aft", {
   expect_prediction_surv(p)
   expect_equal(p$lp[1:20], predict(learner$model$fit, type = "lp")[1:20])
   expect_equal(p$distr[1]$survival(predict(
-    learner$model$fit, type = "quantile", p = c(0.2, 0.8)
+    learner$model$fit,
+    type = "quantile", p = c(0.2, 0.8)
   )[1, ]), c(0.8, 0.2))
-  expect_equal(p$distr[10]$cdf(predict(
-    learner$model$fit, type = "quantile", p = seq.int(0, 1, 0.1)
-  )[10, ]),
-  seq.int(0, 1, 0.1))
+  expect_equal(
+    p$distr[10]$cdf(predict(
+      learner$model$fit,
+      type = "quantile", p = seq.int(0, 1, 0.1)
+    )[10, ]),
+    seq.int(0, 1, 0.1))
 
   learner = lrn("surv.parametric", dist = "lognormal", type = "aft")$train(task)
   p = learner$predict(task)
   expect_equal(p$distr[15]$cdf(predict(
-    learner$model$fit, type = "quantile", p = seq.int(0, 1, 0.1)
+    learner$model$fit,
+    type = "quantile", p = seq.int(0, 1, 0.1)
   )[15, ]), seq.int(0, 1, 0.1))
-#
-#   learner = lrn("surv.parametric", dist = "loglogistic", type = "aft")$train(task)
-#   p = learner$predict(task)
-#   expect_equal(p$distr[15]$cdf(predict(
-#     learner$model$fit, type = "quantile", p = seq.int(0, 1, 0.1)
-#   )[15, ]), seq.int(0, 1, 0.1))
+  #
+  #   learner = lrn("surv.parametric", dist = "loglogistic", type = "aft")$train(task)
+  #   p = learner$predict(task)
+  #   expect_equal(p$distr[15]$cdf(predict(
+  #     learner$model$fit, type = "quantile", p = seq.int(0, 1, 0.1)
+  #   )[15, ]), seq.int(0, 1, 0.1))
 })
 
 
@@ -65,8 +69,9 @@ test_that("quantile", {
   learner = lrn("surv.parametric", dist = "weibull", type = "aft")$train(task)
   p = lrn("surv.parametric", dist = "weibull", type = "aft")$train(task)$predict(task)
   quantile = p$distr$quantile(c(0.2, 0.8))
-  expect_equal(matrix(t(quantile), ncol = 2),
-               predict(learner$model$fit, type = "quantile", p = c(0.2, 0.8)))
+  expect_equal(
+    matrix(t(quantile), ncol = 2),
+    predict(learner$model$fit, type = "quantile", p = c(0.2, 0.8)))
   quantile = p$distr$quantile(0.5)
   expect_equal(unlist(p$distr$cdf(quantile), use.names = FALSE), rep(0.5, 227))
 

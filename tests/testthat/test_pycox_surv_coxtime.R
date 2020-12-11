@@ -8,9 +8,11 @@ test_that("autotest", {
 })
 
 set.seed(1273)
-task = TaskSurv$new("task", data.frame(x1 = rnorm(100), x2 = rgamma(100, 4), x3 = rweibull(100, 2),
-                                       status = rbinom(100, 1, 0.5), time = abs(rexp(100)) + 2),
-                    "time", "status")
+task = TaskSurv$new(
+  "task", data.frame(
+    x1 = rnorm(100), x2 = rgamma(100, 4), x3 = rweibull(100, 2),
+    status = rbinom(100, 1, 0.5), time = abs(rexp(100)) + 2),
+  "time", "status")
 
 test_that("standardise", {
   learner = lrn("surv.coxtime", standardize_time = TRUE, num_nodes = c(2, 2))

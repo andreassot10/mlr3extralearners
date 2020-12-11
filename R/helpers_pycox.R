@@ -215,7 +215,6 @@ get_pycox_activation = function(activation = "relu", construct = TRUE, alpha = 1
   lambd = 0.5, min_val = -1, max_val = 1, negative_slope = 0.01,
   num_parameters = 1L, init = 0.25, lower = 1 / 8, upper = 1 / 3,
   beta = 1, threshold = 20, value = 20) {
-
   torch = reticulate::import("torch")
   act = torch$nn$modules$activation
 
@@ -454,9 +453,9 @@ install_torch = function(method = "auto", conda = "auto", pip = FALSE) {
 #'   batch_norm = TRUE, init = "kaiming_normal", init_pars = list(non_linearity = "relu"))
 #' @export
 build_pytorch_net = function(n_in, n_out, nodes = c(32, 32), activation = "relu",
-                             act_pars = list(), dropout = 0.1,  bias = TRUE, batch_norm = TRUE,
-                             batch_pars = list(eps = 1e-5, momentum = 0.1, affine = TRUE),
-                             init = "uniform", init_pars = list()) {
+  act_pars = list(), dropout = 0.1, bias = TRUE, batch_norm = TRUE,
+  batch_pars = list(eps = 1e-5, momentum = 0.1, affine = TRUE),
+  init = "uniform", init_pars = list()) {
 
   torch = reticulate::import("torch")
   nodes = as.integer(nodes)
@@ -468,16 +467,16 @@ build_pytorch_net = function(n_in, n_out, nodes = c(32, 32), activation = "relu"
   if (length(activation) == 1) {
     checkmate::assert_character(activation)
     activation = rep(list(mlr3misc::invoke(get_pycox_activation,
-                                           activation = activation,
-                                           construct = TRUE,
-                                           .args = act_pars)), lng)
+      activation = activation,
+      construct = TRUE,
+      .args = act_pars)), lng)
   } else {
     checkmate::assert_character(activation, len = lng)
     activation = lapply(activation, function(x) {
       mlr3misc::invoke(get_pycox_activation,
-                       activation = x,
-                       construct = TRUE,
-                       .args = act_pars)
+        activation = x,
+        construct = TRUE,
+        .args = act_pars)
     })
   }
 
@@ -497,8 +496,8 @@ build_pytorch_net = function(n_in, n_out, nodes = c(32, 32), activation = "relu"
     # batch normalisation
     if (batch_norm) {
       net$add_module(paste0("BN", id), mlr3misc::invoke(nn$BatchNorm1d,
-                                                        num_features = num_out,
-                                                        .args = batch_pars))
+        num_features = num_out,
+        .args = batch_pars))
     }
     # dropout layer
     if (!is.null(dropout)) {

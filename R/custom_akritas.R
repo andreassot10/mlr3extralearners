@@ -43,7 +43,7 @@
 #'
 #' @examples
 #' if (requireNamespace("distr6", quietly = TRUE) &&
-#'     requireNamespace("survival", quietly = TRUE)) {
+#'   requireNamespace("survival", quietly = TRUE)) {
 #'
 #'   library(survival)
 #'   fit <- akritas(Surv(time, status) ~ ., data = rats[1:10, ])
@@ -175,28 +175,28 @@ summary.akritas <- function(object, ...) {
 #'
 #' @examples
 #' if (requireNamespace("distr6", quietly = TRUE) &&
-#'     requireNamespace("survival", quietly = TRUE)) {
-#' library(survival)
-#' train <- 1:10
-#' test <- 11:20
-#' fit <- akritas(Surv(time, status) ~ ., data = rats[train, ])
-#' predict(fit, newdata = rats[test, ])
+#'   requireNamespace("survival", quietly = TRUE)) {
+#'   library(survival)
+#'   train <- 1:10
+#'   test <- 11:20
+#'   fit <- akritas(Surv(time, status) ~ ., data = rats[train, ])
+#'   predict(fit, newdata = rats[test, ])
 #'
-#' # when lambda = 1, identical to Kaplan-Meier
-#' fit <- akritas(Surv(time, status) ~ ., data = rats[1:100, ])
-#' predict_akritas <- predict(fit, newdata = rats[1:100, ], lambda = 1)[1, ]
-#' predict_km <- survfit(Surv(time, status) ~ 1, data = rats[1:100, ])$surv
-#' all(predict_akritas == predict_km)
+#'   # when lambda = 1, identical to Kaplan-Meier
+#'   fit <- akritas(Surv(time, status) ~ ., data = rats[1:100, ])
+#'   predict_akritas <- predict(fit, newdata = rats[1:100, ], lambda = 1)[1, ]
+#'   predict_km <- survfit(Surv(time, status) ~ 1, data = rats[1:100, ])$surv
+#'   all(predict_akritas == predict_km)
 #'
-#' # Use distr6 = TRUE to return a distribution
-#' predict_distr <- predict(fit, newdata = rats[test, ], distr6 = TRUE)
-#' predict_distr$survival(100)
+#'   # Use distr6 = TRUE to return a distribution
+#'   predict_distr <- predict(fit, newdata = rats[test, ], distr6 = TRUE)
+#'   predict_distr$survival(100)
 #'
-#' # Return a relative risk ranking with type = "risk"
-#' predict(fit, newdata = rats[test, ], type = "risk")
+#'   # Return a relative risk ranking with type = "risk"
+#'   predict(fit, newdata = rats[test, ], type = "risk")
 #'
-#' # Or survival probabilities and a rank
-#' predict(fit, newdata = rats[test, ], type = "all", distr6 = TRUE)
+#'   # Or survival probabilities and a rank
+#'   predict(fit, newdata = rats[test, ], type = "all", distr6 = TRUE)
 #' }
 #' @export
 predict.akritas <- function(object, newdata, times = NULL,

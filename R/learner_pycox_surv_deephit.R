@@ -89,8 +89,9 @@ LearnerSurvDeephit = R6::R6Class("LearnerSurvDeephit",
       )
 
       ps$add_dep("rho", "optimizer", CondEqual$new("adadelta"))
-      ps$add_dep("eps", "optimizer", CondAnyOf$new(setdiff(pycox_optimizers,
-                                                           c("asgd", "rprop", "sgd"))))
+      ps$add_dep("eps", "optimizer", CondAnyOf$new(setdiff(
+        pycox_optimizers,
+        c("asgd", "rprop", "sgd"))))
       ps$add_dep("lr", "optimizer", CondEqual$new("adadelta"))
       ps$add_dep(
         "weight_decay", "optimizer",

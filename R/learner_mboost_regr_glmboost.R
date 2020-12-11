@@ -68,6 +68,7 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost",
     .train = function(task) {
 
       # Set to default for switch
+
       if (is.null(self$param_set$values$family)) {
         self$param_set$values = insert_named(
           self$param_set$values,

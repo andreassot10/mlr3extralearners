@@ -13,9 +13,11 @@ test_that("autotest", {
   expect_true(result, info = result$error)
 })
 
-task = TaskSurv$new("task", data.frame(x1 = rnorm(100), x2 = rgamma(100, 4), x3 = rweibull(100, 2),
-                                       status = rbinom(100, 1, 0.5), time = abs(rexp(100)) + 2),
-                    "time", "status")
+task = TaskSurv$new(
+  "task", data.frame(
+    x1 = rnorm(100), x2 = rgamma(100, 4), x3 = rweibull(100, 2),
+    status = rbinom(100, 1, 0.5), time = abs(rexp(100)) + 2),
+  "time", "status")
 
 test_that("custom net", {
   net = build_pytorch_net(3L, 10L, nodes = c(2, 4, 8, 32), activation = "elu")

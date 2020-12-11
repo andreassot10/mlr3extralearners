@@ -69,6 +69,7 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost",
     .train = function(task) {
 
       # Set to default for switch
+
       if (is.null(self$param_set$values$family)) {
         self$param_set$values$family = "Gaussian"
       }

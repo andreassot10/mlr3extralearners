@@ -69,6 +69,7 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
     .train = function(task) {
 
       # Default family in mboost::glmboost is not useable for twoclass
+
       if (is.null(self$param_set$values$family)) {
         self$param_set$values = insert_named(
           self$param_set$values,
